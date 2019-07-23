@@ -37,6 +37,10 @@ export default class BaseCompiler<T extends CompileDataType> extends AsyncEventE
     this.app = app;
   }
 
+  get logs() {
+    return this._logs;
+  }
+
   info(message: string | Buffer) {
     this._logs.push({
       type: 'info',
