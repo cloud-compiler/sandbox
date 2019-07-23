@@ -16,7 +16,6 @@ const nelts_2 = require("@nelts/nelts");
 const IO = require("socket.io");
 const port_1 = require("../port");
 const base_1 = require("../compiler/base");
-const html5_1 = require("../compiler/html5");
 const fse = require("fs-extra");
 const Compose = require("koa-compose");
 class Sandbox extends nelts_2.Component.Agent {
@@ -33,26 +32,20 @@ class Sandbox extends nelts_2.Component.Agent {
         this.socketPort = await port_1.default();
         this.io = IO(this.socketPort);
         const task = this.app.inCommingMessage.task;
-        switch (task.type) {
-            case 'html5':
-                this.compiler = new html5_1.default(this, task);
-                break;
-            default:
-                const loaderFile = path.resolve(process.cwd(), 'compile.config.js');
-                if (!fs.existsSync(loaderFile))
-                    throw new Error('no compile.config.js find');
-                const _loaderConfigs = nelts_1.Require(loaderFile);
-                const loaderConfigs = typeof _loaderConfigs === 'function' ? await _loaderConfigs(this) : _loaderConfigs;
-                if (!loaderConfigs[task.type])
-                    throw new Error('non-compiler-loader find');
-                const loader = typeof loaderConfigs[task.type].loader === 'string'
-                    ? nelts_1.Require(loaderConfigs[task.type].loader)
-                    : loaderConfigs[task.type].loader;
-                if (!(loader instanceof base_1.default))
-                    throw new Error('loader must instanceof BaseCompiler');
-                this.compiler = new loader(this, task);
-                this.plugins = loaderConfigs[task.type].plugins || [];
-        }
+        const loaderFile = path.resolve(process.cwd(), 'compile.config.js');
+        if (!fs.existsSync(loaderFile))
+            throw new Error('no compile.config.js find');
+        const _loaderConfigs = nelts_1.Require(loaderFile);
+        const loaderConfigs = typeof _loaderConfigs === 'function' ? await _loaderConfigs(this) : _loaderConfigs;
+        if (!loaderConfigs[task.type])
+            throw new Error('non-compiler-loader find');
+        const loader = typeof loaderConfigs[task.type].loader === 'string'
+            ? nelts_1.Require(loaderConfigs[task.type].loader)
+            : loaderConfigs[task.type].loader;
+        if (!(loader instanceof base_1.default))
+            throw new Error('loader must instanceof BaseCompiler');
+        this.compiler = new loader(this, task);
+        this.plugins = loaderConfigs[task.type].plugins || [];
     }
     async created() {
         await this.compiler.runtime(async () => {

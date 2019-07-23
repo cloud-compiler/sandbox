@@ -39,21 +39,17 @@ export default class Sandbox<T extends CompileDataType> extends Component.Agent 
     this.socketPort = await Port();
     this.io = IO(this.socketPort);
     const task: T = this.app.inCommingMessage.task;
-    switch (task.type) {
-      case 'html5': this.compiler = new (<any>HTML5)(this, task); break;
-      default:
-        const loaderFile = path.resolve(process.cwd(), 'compile.config.js');
-        if (!fs.existsSync(loaderFile)) throw new Error('no compile.config.js find');
-        const _loaderConfigs = Require<CompileConfigType<T>>(loaderFile);
-        const loaderConfigs = typeof _loaderConfigs === 'function' ? await _loaderConfigs(this) : _loaderConfigs;
-        if (!loaderConfigs[task.type]) throw new Error('non-compiler-loader find');
-        const loader = typeof loaderConfigs[task.type].loader === 'string' 
-          ? Require<CustomCompiler<T>>(<string>loaderConfigs[task.type].loader) 
-          : loaderConfigs[task.type].loader as CustomCompiler<T>;
-        if (!(loader instanceof BaseCompiler)) throw new Error('loader must instanceof BaseCompiler');
-        this.compiler = new (<any>loader)(this, task);
-        this.plugins = loaderConfigs[task.type].plugins || [];
-    }
+    const loaderFile = path.resolve(process.cwd(), 'compile.config.js');
+    if (!fs.existsSync(loaderFile)) throw new Error('no compile.config.js find');
+    const _loaderConfigs = Require<CompileConfigType<T>>(loaderFile);
+    const loaderConfigs = typeof _loaderConfigs === 'function' ? await _loaderConfigs(this) : _loaderConfigs;
+    if (!loaderConfigs[task.type]) throw new Error('non-compiler-loader find');
+    const loader = typeof loaderConfigs[task.type].loader === 'string' 
+      ? Require<CustomCompiler<T>>(<string>loaderConfigs[task.type].loader) 
+      : loaderConfigs[task.type].loader as CustomCompiler<T>;
+    if (!(loader instanceof BaseCompiler)) throw new Error('loader must instanceof BaseCompiler');
+    this.compiler = new (<any>loader)(this, task);
+    this.plugins = loaderConfigs[task.type].plugins || [];
   }
   
   async created() {
