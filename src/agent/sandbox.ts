@@ -47,7 +47,7 @@ export default class Sandbox<T extends CompileDataType> extends Component.Agent 
     const loader = typeof loaderConfigs[task.type].loader === 'string' 
       ? Require<CustomCompiler<T>>(<string>loaderConfigs[task.type].loader) 
       : loaderConfigs[task.type].loader as CustomCompiler<T>;
-    if (!(loader instanceof BaseCompiler)) throw new Error('loader must instanceof BaseCompiler');
+    // if (!(loader instanceof BaseCompiler)) throw new Error('loader must instanceof BaseCompiler');
     this.compiler = new (<any>loader)(this, task);
     this.plugins = loaderConfigs[task.type].plugins || [];
   }
