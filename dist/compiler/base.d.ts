@@ -3,6 +3,7 @@
 import SandBox from '../agent/sandbox';
 import { AsyncEventEmitter } from '@nelts/nelts';
 declare type StackCallback = (e: Error) => Promise<any>;
+declare type LogType = 'info' | 'warn' | 'error' | 'debug' | 'log';
 export interface CompileDataType {
     type: string;
     configs?: any;
@@ -22,6 +23,10 @@ export default class BaseCompiler<T extends CompileDataType> extends AsyncEventE
     readonly app: SandBox<T>;
     dictionary: string;
     constructor(app: SandBox<T>, configs: T);
+    readonly logs: {
+        type: LogType;
+        message: string | Buffer;
+    }[];
     info(message: string | Buffer): this;
     warn(message: string | Buffer): this;
     error(message: string | Buffer): this;

@@ -17,6 +17,9 @@ class BaseCompiler extends nelts_1.AsyncEventEmitter {
         this._configs = configs;
         this.app = app;
     }
+    get logs() {
+        return this._logs;
+    }
     info(message) {
         this._logs.push({
             type: 'info',
