@@ -1,5 +1,5 @@
 {
-  "name": "cloudcompiler",
+  "name": "@cloud-compiler/sandbox",
   "version": "1.0.0",
   "description": "The description of this project",
   "main": "dist/index.js",
