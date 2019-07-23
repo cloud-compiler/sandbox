@@ -41,7 +41,8 @@ class Sandbox extends nelts_2.Component.Agent {
                 const loaderFile = path.resolve(process.cwd(), 'compile.config.js');
                 if (!fs.existsSync(loaderFile))
                     throw new Error('no compile.config.js find');
-                const loaderConfigs = nelts_1.Require(loaderFile);
+                const _loaderConfigs = nelts_1.Require(loaderFile);
+                const loaderConfigs = typeof _loaderConfigs === 'function' ? await _loaderConfigs(this) : _loaderConfigs;
                 if (!loaderConfigs[task.type])
                     throw new Error('non-compiler-loader find');
                 const loader = typeof loaderConfigs[task.type].loader === 'string'

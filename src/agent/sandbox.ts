@@ -16,6 +16,8 @@ interface PluginLoader<T extends CompileDataType> {
   }
 }
 
+type CompileConfigType<T extends CompileDataType> = PluginLoader<T> | ((app: Sandbox<T>) => Promise<PluginLoader<T>>);
+
 export default class Sandbox<T extends CompileDataType> extends Component.Agent {
   public io: IO.Server;
   private socketPort: number;
@@ -42,7 +44,8 @@ export default class Sandbox<T extends CompileDataType> extends Component.Agent 
       default:
         const loaderFile = path.resolve(process.cwd(), 'compile.config.js');
         if (!fs.existsSync(loaderFile)) throw new Error('no compile.config.js find');
-        const loaderConfigs = Require<PluginLoader<T>>(loaderFile);
+        const _loaderConfigs = Require<CompileConfigType<T>>(loaderFile);
+        const loaderConfigs = typeof _loaderConfigs === 'function' ? await _loaderConfigs(this) : _loaderConfigs;
         if (!loaderConfigs[task.type]) throw new Error('non-compiler-loader find');
         const loader = typeof loaderConfigs[task.type].loader === 'string' 
           ? Require<CustomCompiler<T>>(<string>loaderConfigs[task.type].loader) 

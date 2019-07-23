@@ -1,4 +1,4 @@
 export default {
   cookie: ['nelts', 'cookie'],
-  dictionary: process.env.HOME,
+  dictionary: process.cwd(),
 }

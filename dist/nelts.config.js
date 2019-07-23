@@ -2,5 +2,5 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     cookie: ['nelts', 'cookie'],
-    dictionary: process.env.HOME,
+    dictionary: process.cwd(),
 };

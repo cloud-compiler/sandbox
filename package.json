@@ -8,6 +8,9 @@
     "type": "git",
     "url": "git+https://github.com/nelts/template.git"
   },
+  "bin": {
+    "cc": "dist/bin.js"
+  },
   "scripts": {
     "dev": "nelts-server dev -m 1",
     "build": "rm -rf dist/ && tsc -d",
@@ -33,6 +36,7 @@
     "@types/request": "^2.48.2",
     "@types/socket.io": "^2.1.2",
     "@types/unzip": "^0.1.1",
+    "commander": "^2.20.0",
     "detect-port": "^1.3.0",
     "fs-extra": "^8.1.0",
     "randomstring": "^1.1.5",
