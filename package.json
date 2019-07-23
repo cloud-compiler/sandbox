@@ -1,9 +1,9 @@
 {
   "name": "@cloud-compiler/sandbox",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The description of this project",
   "main": "dist/index.js",
-  "source": "src",
+  "source": "dist",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cloud-compiler/sandbox"
