@@ -159,7 +159,7 @@ $ npm run restart # 重启服务
 
 ## 注册任务
 
-- **路由** `http://cc.example.com/task/${task_id}/register`
+- **路由** `http://cc.example.com/task/${task_id}`
 - **方法** `PUT`
 - **BODY参数** 如下：
 
@@ -190,14 +190,14 @@ $ npm run restart # 重启服务
 
 ## 启动编译
 
-- **路由** `http://cc.example.com/task/${task_id}/compile`
+- **路由** `http://cc.example.com/task/${task_id}`
 - **方法** `POST`
 - **BODY参数** 无
 
 
 ## 停止编译
 
-- **路由** `http://cc.example.com/task/${task_id}/teardown`
+- **路由** `http://cc.example.com/task/${task_id}`
 - **方法** `DELETE`
 
 ## 获取健康状态

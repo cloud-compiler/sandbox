@@ -42,20 +42,20 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], IndexController.prototype, "Home", null);
 __decorate([
-    Controller.Put('/task/:id/register'),
+    Controller.Put('/task/:id'),
     Controller.Request.Dynamic.Loader(nelts_1.Extra.Body({ isapi: true })),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], IndexController.prototype, "Register", null);
 __decorate([
-    Controller.Delete('/task/:id/teardown'),
+    Controller.Delete('/task/:id'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], IndexController.prototype, "ShutDown", null);
 __decorate([
-    Controller.Post('/task/:id/compile'),
+    Controller.Post('/task/:id'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
