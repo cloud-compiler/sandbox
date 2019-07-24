@@ -1,9 +1,9 @@
 {
   "name": "@cloud-compiler/sandbox",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "The description of this project",
   "main": "dist/index.js",
-  "source": "dist",
+  "source": "src",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cloud-compiler/sandbox"
@@ -12,7 +12,7 @@
     "cc": "dist/bin.js"
   },
   "scripts": {
-    "dev": "nelts-server dev -m 1",
+    "dev": "nelts-server dev -m 1 -p 9047",
     "build": "rm -rf dist/ && tsc -d",
     "start": "nelts-server start",
     "restart": "nelts-server restart",
@@ -29,8 +29,8 @@
   },
   "homepage": "https://github.com/cloud-compiler/sandbox#readme",
   "dependencies": {
-    "@nelts/nelts": "^1.1.28",
-    "@nelts/process": "^1.1.1",
+    "@nelts/nelts": "^1.1.29",
+    "@nelts/process": "^1.1.2",
     "@types/fs-extra": "^8.0.0",
     "@types/randomstring": "^1.1.6",
     "@types/request": "^2.48.2",

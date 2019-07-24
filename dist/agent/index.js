@@ -40,7 +40,10 @@ let CloudCompilerGateWay = class CloudCompilerGateWay extends nelts_1.Component.
                 socketPort: 0,
                 dictionary: null
             };
-            const pid = await this.messager.createAgent(data.id, sandbox, { task: data.body });
+            const pid = await this.messager.createAgent(data.id, sandbox, { task: data.body, killSelf: true }).catch(e => {
+                delete this.compilers[data.id];
+                return Promise.reject(e);
+            });
             const socketPort = await this.asyncSend('port', null, pid);
             this.compilers[data.id].pid = pid;
             this.compilers[data.id].socketPort = socketPort;
