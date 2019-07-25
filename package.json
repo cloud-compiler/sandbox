@@ -1,6 +1,6 @@
 {
   "name": "@cloud-compiler/sandbox",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "The description of this project",
   "main": "dist/index.js",
   "source": "src",
