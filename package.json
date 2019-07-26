@@ -1,6 +1,6 @@
 {
   "name": "@cloud-compiler/sandbox",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "The description of this project",
   "main": "dist/index.js",
   "source": "src",
@@ -19,8 +19,10 @@
     "stop": "nelts-server stop"
   },
   "keywords": [
-    "template",
-    "nelts"
+    "nelts",
+    "compiler",
+    "frontend",
+    "cloud-compiler"
   ],
   "author": "cevio",
   "license": "MIT",
@@ -29,7 +31,7 @@
   },
   "homepage": "https://github.com/cloud-compiler/sandbox#readme",
   "dependencies": {
-    "@nelts/nelts": "^1.1.30",
+    "@nelts/nelts": "^1.1.34",
     "@nelts/process": "^1.1.6",
     "@types/fs-extra": "^8.0.0",
     "@types/randomstring": "^1.1.6",
